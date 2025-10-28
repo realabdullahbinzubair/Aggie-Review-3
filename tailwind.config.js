@@ -10,7 +10,7 @@ export default {
           dark: '#002244',
         },
         'ncat-gold': {
-          DEFAULT: '#FFD700',
+          DEFAULT: '#FFD200',
           light: '#FFE55C',
           dark: '#D4A017',
         },
