@@ -25,6 +25,7 @@ export interface Professor {
   difficulty_rating: number;
   created_at?: string;
   department?: Department;
+  departments?: Department[];
 }
 
 export interface Profile {

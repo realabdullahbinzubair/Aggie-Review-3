@@ -16,6 +16,7 @@ export default function ProfessorSearchPage() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const searchQuery = searchParams.get('search') || '';
 
@@ -31,19 +32,84 @@ export default function ProfessorSearchPage() {
 
   const searchProfessors = async () => {
     setLoading(true);
+    setSuggestions([]);
+
     const { data, error } = await supabase
       .from('professors')
-      .select('*, department:departments(*)')
+      .select('id, name, department_id, title, average_rating, total_reviews, would_take_again_percent, difficulty_rating, created_at')
       .ilike('name', `%${searchQuery}%`)
       .order('name');
 
-    if (!error && data) {
-      setProfessors(data);
-      if (data.length === 1) {
-        setSelectedProfessor(data[0]);
+    if (!error && data && data.length > 0) {
+      const professorsWithDepts = await Promise.all(
+        data.map(async (prof) => {
+          const { data: depts } = await supabase
+            .from('professor_departments')
+            .select('department:departments(*)')
+            .eq('professor_id', prof.id);
+
+          return {
+            ...prof,
+            departments: depts?.map(d => d.department).filter(Boolean) || [],
+            department: depts?.[0]?.department || undefined
+          };
+        })
+      );
+
+      setProfessors(professorsWithDepts);
+      if (professorsWithDepts.length === 1) {
+        setSelectedProfessor(professorsWithDepts[0]);
+      }
+    } else if (!error && data && data.length === 0) {
+      const { data: allProfs } = await supabase
+        .from('professors')
+        .select('name')
+        .limit(1000);
+
+      if (allProfs) {
+        const similar = allProfs
+          .filter(p => {
+            const name = p.name.toLowerCase();
+            const query = searchQuery.toLowerCase();
+            const words = query.split(' ');
+            return words.some(word => name.includes(word)) ||
+                   levenshteinDistance(name, query) < 5;
+          })
+          .slice(0, 5)
+          .map(p => p.name);
+
+        setSuggestions(similar);
       }
     }
     setLoading(false);
+  };
+
+  const levenshteinDistance = (str1: string, str2: string): number => {
+    const matrix: number[][] = [];
+
+    for (let i = 0; i <= str2.length; i++) {
+      matrix[i] = [i];
+    }
+
+    for (let j = 0; j <= str1.length; j++) {
+      matrix[0][j] = j;
+    }
+
+    for (let i = 1; i <= str2.length; i++) {
+      for (let j = 1; j <= str1.length; j++) {
+        if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+          matrix[i][j] = matrix[i - 1][j - 1];
+        } else {
+          matrix[i][j] = Math.min(
+            matrix[i - 1][j - 1] + 1,
+            matrix[i][j - 1] + 1,
+            matrix[i - 1][j] + 1
+          );
+        }
+      }
+    }
+
+    return matrix[str2.length][str1.length];
   };
 
   const loadReviews = async (professorId: string) => {
@@ -101,7 +167,17 @@ export default function ProfessorSearchPage() {
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-2">{selectedProfessor.name}</h2>
                 <p className="text-lg text-gray-600">{selectedProfessor.title}</p>
-                <p className="text-gray-500">{selectedProfessor.department?.name}</p>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {selectedProfessor.departments && selectedProfessor.departments.length > 0 ? (
+                    selectedProfessor.departments.map((dept, idx) => (
+                      <span key={idx} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                        {dept.name}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-gray-500">{selectedProfessor.department?.name || 'Department not specified'}</span>
+                  )}
+                </div>
               </div>
               {user && (
                 <button
@@ -266,7 +342,23 @@ export default function ProfessorSearchPage() {
 
         {professors.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-500 text-lg">No professors found matching your search.</p>
+            <p className="text-gray-500 text-lg mb-4">No professors found matching your search.</p>
+            {suggestions.length > 0 && (
+              <div className="mt-6">
+                <p className="text-gray-700 font-semibold mb-3">Did you mean:</p>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {suggestions.map((suggestion, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => navigate(`/professor?search=${encodeURIComponent(suggestion)}`)}
+                      className="px-4 py-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 rounded-lg font-medium transition-colors"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -278,7 +370,17 @@ export default function ProfessorSearchPage() {
               >
                 <h3 className="text-xl font-bold text-gray-900 mb-1">{professor.name}</h3>
                 <p className="text-gray-600 text-sm mb-1">{professor.title}</p>
-                <p className="text-gray-500 text-sm mb-4">{professor.department?.name}</p>
+                <div className="flex flex-wrap gap-1 mb-4">
+                  {professor.departments && professor.departments.length > 0 ? (
+                    professor.departments.map((dept, idx) => (
+                      <span key={idx} className="text-xs px-2 py-1 bg-yellow-50 text-yellow-700 rounded">
+                        {dept.name}
+                      </span>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 text-sm">{professor.department?.name || 'N/A'}</p>
+                  )}
+                </div>
 
                 <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                   <div className="text-center">
