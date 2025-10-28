@@ -3,11 +3,22 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-         colors: {
-        'aggie-blue': '#0033a0',
-        'aggie-gold': '#ffd200',
-        'aggie-green': '#2a9d8f'
-      },
+             colors: {
+        'ncat-blue': {
+          DEFAULT: '#003366',
+          light: '#004684',
+          dark: '#002244',
+        },
+        'ncat-gold': {
+          DEFAULT: '#FFD700',
+          light: '#FFE55C',
+          dark: '#D4A017',
+        },
+        'ncat-green': {
+          DEFAULT: '#228B22',
+          light: '#32CD32',
+          dark: '#006400',
+        },
       },
     },
   },
