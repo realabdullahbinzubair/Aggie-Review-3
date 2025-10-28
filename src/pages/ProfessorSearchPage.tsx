@@ -124,10 +124,32 @@ export default function ProfessorSearchPage() {
     }
   };
 
-  const handleReviewSubmitted = () => {
+  const handleReviewSubmitted = async () => {
     if (selectedProfessor) {
-      loadReviews(selectedProfessor.id);
-      searchProfessors();
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      await loadReviews(selectedProfessor.id);
+
+      const { data: updatedProf } = await supabase
+        .from('professors')
+        .select('id, name, department_id, title, average_rating, total_reviews, would_take_again_percent, difficulty_rating, created_at')
+        .eq('id', selectedProfessor.id)
+        .maybeSingle();
+
+      if (updatedProf) {
+        const { data: depts } = await supabase
+          .from('professor_departments')
+          .select('department:departments(*)')
+          .eq('professor_id', updatedProf.id);
+
+        setSelectedProfessor({
+          ...updatedProf,
+          departments: depts?.map(d => d.department).filter(Boolean) || [],
+          department: depts?.[0]?.department || undefined
+        });
+      }
+
+      await searchProfessors();
     }
     setShowReviewForm(false);
   };

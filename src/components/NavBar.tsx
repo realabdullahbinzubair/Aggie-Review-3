@@ -15,7 +15,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-ncat-gold to-ncat-blue text-white shadow-lg">
+    <nav className="bg-ncat-blue text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <button
