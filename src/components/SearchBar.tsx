@@ -158,7 +158,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
             placeholder={
               searchType === 'professor'
                 ? 'Search by professor name...'
-                : 'Search by course code (e.g., COMP 285)...'
+                : 'Search by course code (ex., COMP 285)...'
             }
             className="w-full pl-12 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent"
           />
