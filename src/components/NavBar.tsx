@@ -25,7 +25,7 @@ export default function NavBar() {
             <GraduationCap size={32} />
             <div className="text-left">
              <h1 className="text-xl font-bold text-ncat-gold">Aggie Review</h1>
-              <p className="text-xs text-ncat-gold-light/20">NC A&T</p>
+              <p className="text-xs text-ncat-gold">NC A&T</p>
             </div>
           </button>
 
