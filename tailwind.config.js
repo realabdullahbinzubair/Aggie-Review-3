@@ -3,16 +3,16 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-             colors: {
+      colors: {
         'ncat-blue': {
-          DEFAULT: '#0066CC',
-          light: '#3399FF',
-          dark: '#004499',
+          DEFAULT: '#003366',
+          light: '#004684',
+          dark: '#002244',
         },
         'ncat-gold': {
-          DEFAULT: '#FFCC00',
-          light: '#FFD633',
-          dark: '#CC9900',
+          DEFAULT: '#FFD700',
+          light: '#FFE55C',
+          dark: '#D4A017',
         },
         'ncat-green': {
           DEFAULT: '#228B22',
