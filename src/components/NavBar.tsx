@@ -15,7 +15,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg">
+    <nav className="bg-gradient-to-r from-ncat-gold to-ncat-blue text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <button
@@ -25,7 +25,7 @@ export default function NavBar() {
             <GraduationCap size={32} />
             <div className="text-left">
               <h1 className="text-xl font-bold">Aggie Review</h1>
-              <p className="text-xs text-yellow-100">NC A&T</p>
+              <p className="text-xs text-ncat-gold-light/20">NC A&T</p>
             </div>
           </button>
 
@@ -34,7 +34,7 @@ export default function NavBar() {
               <div className="relative">
                 <button
                   onClick={() => setShowMenu(!showMenu)}
-                  className="flex items-center space-x-2 bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-lg transition-colors"
+                  className="flex items-center space-x-2 bg-ncat-blue hover:bg-ncat-blue-dark px-4 py-2 rounded-lg transition-colors"
                 >
                   <Menu size={20} />
                   <span className="hidden sm:inline">Menu</span>
@@ -103,7 +103,7 @@ export default function NavBar() {
             ) : (
               <button
                 onClick={() => navigate('/auth')}
-                className="bg-white text-yellow-600 hover:bg-yellow-50 px-4 py-2 rounded-lg font-semibold transition-colors"
+                className="bg-white text-ncat-blue hover:bg-ncat-gold-light/10 px-4 py-2 rounded-lg font-semibold transition-colors"
               >
                 Sign In
               </button>

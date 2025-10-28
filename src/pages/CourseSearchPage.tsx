@@ -40,7 +40,7 @@ export default function CourseSearchPage() {
     if (!error && data) {
       setCourses(data);
       if (data.length === 1) {
-        setSelectedCourse(data[0]);
+        navigate(`/course-profile?code=${encodeURIComponent(data[0].code)}`);
       }
     }
     setLoading(false);
@@ -94,8 +94,8 @@ export default function CourseSearchPage() {
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
             <div className="flex items-start space-x-4">
-              <div className="bg-yellow-100 rounded-full p-4">
-                <BookOpen size={32} className="text-yellow-600" />
+              <div className="bg-ncat-gold-light/20 rounded-full p-4">
+                <BookOpen size={32} className="text-ncat-blue" />
               </div>
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-2">{selectedCourse.code}</h2>
@@ -118,7 +118,7 @@ export default function CourseSearchPage() {
                 {professorData.map((professor) => (
                   <div
                     key={professor.id}
-                    className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all p-6 border border-gray-100 hover:border-yellow-400 cursor-pointer"
+                    className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all p-6 border border-gray-100 hover:border-ncat-gold cursor-pointer"
                     onClick={() => handleProfessorClick(professor)}
                   >
                     <div className="flex justify-between items-start mb-4">
@@ -130,10 +130,10 @@ export default function CourseSearchPage() {
                         <p className="text-sm text-gray-500">{professor.department?.name}</p>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-yellow-600">
+                        <div className="text-3xl font-bold text-ncat-blue">
                           {professor.average_rating.toFixed(1)}
                         </div>
-                        <div className="flex items-center justify-center text-yellow-500">
+                        <div className="flex items-center justify-center text-ncat-gold">
                           <Star size={16} fill="currentColor" />
                         </div>
                       </div>
@@ -198,11 +198,11 @@ export default function CourseSearchPage() {
             {courses.map((course) => (
               <button
                 key={course.id}
-                onClick={() => setSelectedCourse(course)}
-                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all p-6 text-left border border-gray-100 hover:border-yellow-400"
+                onClick={() => navigate(`/course-profile?code=${encodeURIComponent(course.code)}`)}
+                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all p-6 text-left border border-gray-100 hover:border-ncat-gold"
               >
                 <div className="flex items-start space-x-3 mb-3">
-                  <BookOpen size={24} className="text-yellow-600 mt-1" />
+                  <BookOpen size={24} className="text-ncat-blue mt-1" />
                   <div>
                     <h3 className="text-lg font-bold text-gray-900">{course.code}</h3>
                     <p className="text-sm text-gray-600">{course.name}</p>

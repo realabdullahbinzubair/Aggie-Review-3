@@ -127,7 +127,7 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
             <select
               value={formData.course_id}
               onChange={(e) => setFormData({ ...formData, course_id: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent"
               required
             >
               <option value="">Select a course</option>
@@ -157,7 +157,7 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
                     size={36}
                     className={
                       star <= (hoveredRating || formData.rating)
-                        ? 'text-yellow-500'
+                        ? 'text-ncat-gold'
                         : 'text-gray-300'
                     }
                     fill={star <= (hoveredRating || formData.rating) ? 'currentColor' : 'none'}
@@ -184,7 +184,7 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
                   onMouseLeave={() => setHoveredDifficulty(0)}
                   className={`w-12 h-12 rounded-lg font-bold text-white transition-all ${
                     level <= (hoveredDifficulty || formData.difficulty)
-                      ? 'bg-yellow-500 scale-110'
+                      ? 'bg-ncat-gold scale-110'
                       : 'bg-gray-300'
                   }`}
                 >
@@ -232,7 +232,7 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
             <select
               value={formData.grade_received}
               onChange={(e) => setFormData({ ...formData, grade_received: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent"
             >
               <option value="">Select grade</option>
               <option value="A">A</option>
@@ -255,7 +255,7 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
                 type="checkbox"
                 checked={formData.for_credit}
                 onChange={(e) => setFormData({ ...formData, for_credit: e.target.checked })}
-                className="w-5 h-5 text-yellow-500 border-gray-300 rounded focus:ring-yellow-500"
+                className="w-5 h-5 text-ncat-gold border-gray-300 rounded focus:ring-ncat-gold"
               />
               <span className="text-sm text-gray-700">Taken for credit</span>
             </label>
@@ -264,7 +264,7 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
                 type="checkbox"
                 checked={formData.attendance_mandatory}
                 onChange={(e) => setFormData({ ...formData, attendance_mandatory: e.target.checked })}
-                className="w-5 h-5 text-yellow-500 border-gray-300 rounded focus:ring-yellow-500"
+                className="w-5 h-5 text-ncat-gold border-gray-300 rounded focus:ring-ncat-gold"
               />
               <span className="text-sm text-gray-700">Attendance is mandatory</span>
             </label>
@@ -279,7 +279,7 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
               onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
               placeholder="Share your experience with this professor..."
               rows={6}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent resize-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent resize-none"
               required
             />
             <p className="text-sm text-gray-500 mt-1">
@@ -304,7 +304,7 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
             </button>
             <button
               type="submit"
-              className="flex-1 px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg font-medium transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-6 py-3 bg-ncat-gold hover:bg-ncat-blue text-white rounded-lg font-medium transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={submitting}
             >
               {submitting ? 'Submitting...' : 'Submit Review'}

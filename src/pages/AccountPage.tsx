@@ -67,8 +67,8 @@ export default function AccountPage() {
 
         <div className="bg-white rounded-lg shadow-md p-8 mb-6">
           <div className="flex items-center space-x-4 mb-6">
-            <div className="bg-yellow-100 rounded-full p-4">
-              <User size={32} className="text-yellow-600" />
+            <div className="bg-ncat-gold-light/20 rounded-full p-4">
+              <User size={32} className="text-ncat-blue" />
             </div>
             <div>
               <h3 className="text-2xl font-bold text-gray-900">
@@ -108,10 +108,10 @@ export default function AccountPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Reviews Written</h3>
-            <p className="text-4xl font-bold text-yellow-600 mb-2">{reviewCount}</p>
+            <p className="text-4xl font-bold text-ncat-blue mb-2">{reviewCount}</p>
             <button
               onClick={() => navigate('/my-reviews')}
-              className="text-yellow-600 hover:text-yellow-700 font-medium text-sm"
+              className="text-ncat-blue hover:text-ncat-blue-dark font-medium text-sm"
             >
               View all reviews →
             </button>

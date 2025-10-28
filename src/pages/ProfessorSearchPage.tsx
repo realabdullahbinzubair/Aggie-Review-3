@@ -134,7 +134,7 @@ export default function ProfessorSearchPage() {
 
   const getRatingColor = (rating: number) => {
     if (rating >= 4.5) return 'bg-green-500';
-    if (rating >= 3.5) return 'bg-yellow-500';
+    if (rating >= 3.5) return 'bg-ncat-gold';
     return 'bg-red-500';
   };
 
@@ -156,7 +156,7 @@ export default function ProfessorSearchPage() {
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <button
             onClick={() => setSelectedProfessor(null)}
-            className="flex items-center space-x-2 text-gray-600 hover:text-yellow-600 mb-6 transition-colors"
+            className="flex items-center space-x-2 text-gray-600 hover:text-ncat-blue mb-6 transition-colors"
           >
             <ArrowLeft size={20} />
             <span className="font-medium">Back to search results</span>
@@ -170,7 +170,7 @@ export default function ProfessorSearchPage() {
                 <div className="flex flex-wrap gap-2 mt-2">
                   {selectedProfessor.departments && selectedProfessor.departments.length > 0 ? (
                     selectedProfessor.departments.map((dept, idx) => (
-                      <span key={idx} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                      <span key={idx} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-ncat-gold-light/20 text-ncat-blue-dark">
                         {dept.name}
                       </span>
                     ))
@@ -182,7 +182,7 @@ export default function ProfessorSearchPage() {
               {user && (
                 <button
                   onClick={() => setShowReviewForm(true)}
-                  className="mt-4 md:mt-0 flex items-center space-x-2 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-md"
+                  className="mt-4 md:mt-0 flex items-center space-x-2 bg-ncat-gold hover:bg-ncat-blue text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-md"
                 >
                   <MessageSquarePlus size={20} />
                   <span>Rate Professor</span>
@@ -197,7 +197,7 @@ export default function ProfessorSearchPage() {
                     {selectedProfessor.average_rating.toFixed(1)}
                   </div>
                 </div>
-                <div className="flex items-center justify-center text-yellow-500 mb-1">
+                <div className="flex items-center justify-center text-ncat-gold mb-1">
                   <Star size={18} fill="currentColor" />
                 </div>
                 <p className="text-sm text-gray-600 font-medium">Overall Rating</p>
@@ -215,7 +215,7 @@ export default function ProfessorSearchPage() {
 
               <div className="text-center p-4 bg-gray-50 rounded-lg">
                 <div className="flex items-center justify-center mb-2">
-                  <TrendingUp size={32} className="text-yellow-600" />
+                  <TrendingUp size={32} className="text-ncat-blue" />
                 </div>
                 <p className="text-3xl font-bold text-gray-900 mb-1">
                   {selectedProfessor.difficulty_rating.toFixed(1)}
@@ -245,7 +245,7 @@ export default function ProfessorSearchPage() {
                 {user && (
                   <button
                     onClick={() => setShowReviewForm(true)}
-                    className="inline-flex items-center space-x-2 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                    className="inline-flex items-center space-x-2 bg-ncat-gold hover:bg-ncat-blue text-white px-6 py-3 rounded-lg font-medium transition-colors"
                   >
                     <MessageSquarePlus size={20} />
                     <span>Be the first to review</span>
@@ -264,7 +264,7 @@ export default function ProfessorSearchPage() {
                               <Star
                                 key={i}
                                 size={20}
-                                className={i < review.rating ? 'text-yellow-500' : 'text-gray-300'}
+                                className={i < review.rating ? 'text-ncat-gold' : 'text-gray-300'}
                                 fill={i < review.rating ? 'currentColor' : 'none'}
                               />
                             ))}
@@ -303,7 +303,7 @@ export default function ProfessorSearchPage() {
                       </span>
 
                       {review.attendance_mandatory && (
-                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-ncat-gold-light/20 text-ncat-blue-dark">
                           Attendance mandatory
                         </span>
                       )}
@@ -351,7 +351,7 @@ export default function ProfessorSearchPage() {
                     <button
                       key={idx}
                       onClick={() => navigate(`/professor?search=${encodeURIComponent(suggestion)}`)}
-                      className="px-4 py-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 rounded-lg font-medium transition-colors"
+                      className="px-4 py-2 bg-ncat-gold-light/20 hover:bg-ncat-gold-light/30 text-ncat-blue-dark rounded-lg font-medium transition-colors"
                     >
                       {suggestion}
                     </button>
@@ -366,14 +366,14 @@ export default function ProfessorSearchPage() {
               <button
                 key={professor.id}
                 onClick={() => setSelectedProfessor(professor)}
-                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all p-6 text-left border border-gray-100 hover:border-yellow-400"
+                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all p-6 text-left border border-gray-100 hover:border-ncat-gold"
               >
                 <h3 className="text-xl font-bold text-gray-900 mb-1">{professor.name}</h3>
                 <p className="text-gray-600 text-sm mb-1">{professor.title}</p>
                 <div className="flex flex-wrap gap-1 mb-4">
                   {professor.departments && professor.departments.length > 0 ? (
                     professor.departments.map((dept, idx) => (
-                      <span key={idx} className="text-xs px-2 py-1 bg-yellow-50 text-yellow-700 rounded">
+                      <span key={idx} className="text-xs px-2 py-1 bg-ncat-gold-light/10 text-ncat-blue-dark rounded">
                         {dept.name}
                       </span>
                     ))
@@ -384,7 +384,7 @@ export default function ProfessorSearchPage() {
 
                 <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-yellow-600">
+                    <div className="text-2xl font-bold text-ncat-blue">
                       {professor.average_rating.toFixed(1)}
                     </div>
                     <div className="text-xs text-gray-500">Rating</div>

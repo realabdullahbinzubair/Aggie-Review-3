@@ -109,7 +109,7 @@ export default function MyReviewsPage() {
             <p className="text-gray-500 text-lg mb-4">You haven't written any reviews yet.</p>
             <button
               onClick={() => navigate('/')}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="bg-ncat-gold hover:bg-ncat-blue text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Search Professors
             </button>
@@ -132,7 +132,7 @@ export default function MyReviewsPage() {
                           <Star
                             key={i}
                             size={20}
-                            className={i < review.rating ? 'text-yellow-500' : 'text-gray-300'}
+                            className={i < review.rating ? 'text-ncat-gold' : 'text-gray-300'}
                             fill={i < review.rating ? 'currentColor' : 'none'}
                           />
                         ))}
@@ -183,7 +183,7 @@ export default function MyReviewsPage() {
                   </span>
 
                   {review.attendance_mandatory && (
-                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-ncat-gold-light/20 text-ncat-blue-dark">
                       Attendance mandatory
                     </span>
                   )}

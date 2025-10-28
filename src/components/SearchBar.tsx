@@ -122,7 +122,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           }}
           className={`flex-1 py-2 px-4 rounded-lg font-medium transition-all ${
             searchType === 'professor'
-              ? 'bg-yellow-500 text-white'
+              ? 'bg-ncat-gold text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -136,7 +136,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           }}
           className={`flex-1 py-2 px-4 rounded-lg font-medium transition-all ${
             searchType === 'course'
-              ? 'bg-yellow-500 text-white'
+              ? 'bg-ncat-gold text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -160,7 +160,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
                 ? 'Search by professor name...'
                 : 'Search by course code (e.g., COMP 285)...'
             }
-            className="w-full pl-12 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+            className="w-full pl-12 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent"
           />
           {query && (
             <button
@@ -179,8 +179,8 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
               <button
                 key={suggestion.id}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className={`w-full text-left px-4 py-3 hover:bg-yellow-50 transition-colors border-b border-gray-100 last:border-b-0 ${
-                  index === selectedIndex ? 'bg-yellow-50' : ''
+                className={`w-full text-left px-4 py-3 hover:bg-ncat-gold-light/10 transition-colors border-b border-gray-100 last:border-b-0 ${
+                  index === selectedIndex ? 'bg-ncat-gold-light/10' : ''
                 }`}
               >
                 <div className="flex items-center space-x-2">

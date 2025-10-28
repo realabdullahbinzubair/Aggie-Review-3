@@ -62,11 +62,11 @@ export default function SignInUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-ncat-gold-light/10 to-ncat-gold-light/20 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
-            <GraduationCap size={48} className="text-yellow-600" />
+            <GraduationCap size={48} className="text-ncat-blue" />
             <h1 className="text-4xl font-bold text-gray-900">Aggie Review</h1>
           </div>
           <p className="text-gray-600">North Carolina A&T State University</p>
@@ -82,7 +82,7 @@ export default function SignInUpPage() {
               }}
               className={`flex-1 py-2 rounded-md font-medium transition-all ${
                 !isSignUp
-                  ? 'bg-yellow-500 text-white shadow-sm'
+                  ? 'bg-ncat-gold text-white shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -96,7 +96,7 @@ export default function SignInUpPage() {
               }}
               className={`flex-1 py-2 rounded-md font-medium transition-all ${
                 isSignUp
-                  ? 'bg-yellow-500 text-white shadow-sm'
+                  ? 'bg-ncat-gold text-white shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -116,7 +116,7 @@ export default function SignInUpPage() {
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent"
                     placeholder="John Doe"
                     required={isSignUp}
                   />
@@ -134,7 +134,7 @@ export default function SignInUpPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent"
                   placeholder="student@aggies.ncat.edu"
                   required
                 />
@@ -154,7 +154,7 @@ export default function SignInUpPage() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent"
                   placeholder="••••••••"
                   required
                 />
@@ -173,7 +173,7 @@ export default function SignInUpPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-ncat-gold hover:bg-ncat-blue text-white font-semibold py-3 rounded-lg transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Please wait...' : isSignUp ? 'Create Account' : 'Sign In'}
             </button>
@@ -183,7 +183,7 @@ export default function SignInUpPage() {
             <button
               type="button"
               onClick={() => navigate('/')}
-              className="text-sm text-gray-600 hover:text-yellow-600 transition-colors"
+              className="text-sm text-gray-600 hover:text-ncat-blue transition-colors"
             >
               Continue as guest
             </button>

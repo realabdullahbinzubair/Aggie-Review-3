@@ -34,8 +34,8 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
             <div className="flex justify-center mb-4">
-              <div className="bg-yellow-100 rounded-full p-4">
-                <Users size={32} className="text-yellow-600" />
+              <div className="bg-ncat-gold-light/20 rounded-full p-4">
+                <Users size={32} className="text-ncat-blue" />
               </div>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -48,8 +48,8 @@ export default function LandingPage() {
 
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
             <div className="flex justify-center mb-4">
-              <div className="bg-yellow-100 rounded-full p-4">
-                <Star size={32} className="text-yellow-600" />
+              <div className="bg-ncat-gold-light/20 rounded-full p-4">
+                <Star size={32} className="text-ncat-blue" />
               </div>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -62,8 +62,8 @@ export default function LandingPage() {
 
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
             <div className="flex justify-center mb-4">
-              <div className="bg-yellow-100 rounded-full p-4">
-                <TrendingUp size={32} className="text-yellow-600" />
+              <div className="bg-ncat-gold-light/20 rounded-full p-4">
+                <TrendingUp size={32} className="text-ncat-blue" />
               </div>
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -75,7 +75,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="mt-16 bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+        <div className="mt-16 bg-ncat-gold-light/10 border-l-4 border-ncat-gold p-6 rounded-lg">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
             Want to leave a review?
           </h3>
@@ -84,7 +84,7 @@ export default function LandingPage() {
           </p>
           <button
             onClick={() => navigate('/auth')}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+            className="bg-ncat-gold hover:bg-ncat-blue text-white px-6 py-2 rounded-lg font-semibold transition-colors"
           >
             Sign In to Review
           </button>
