@@ -5,14 +5,19 @@ export default {
     extend: {
       colors: {
         'ncat-blue': {
-          DEFAULT: '#004684',
-          light: '#0066B3',
-          dark: '#003366',
+          DEFAULT: '#003366',
+          light: '#004684',
+          dark: '#002244',
         },
         'ncat-gold': {
-          DEFAULT: '#FFC72C',
-          light: '#FFD659',
+          DEFAULT: '#FFD700',
+          light: '#FFE55C',
           dark: '#D4A017',
+        },
+        'ncat-green': {
+          DEFAULT: '#228B22',
+          light: '#32CD32',
+          dark: '#006400',
         },
       },
     },
