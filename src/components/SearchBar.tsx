@@ -136,7 +136,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           }}
           className={`flex-1 py-2 px-4 rounded-lg font-medium transition-all ${
             searchType === 'course'
-              ? 'bg-ncat-gold text-white'
+              ? 'bg-ncat-gold-light text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
