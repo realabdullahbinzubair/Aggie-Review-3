@@ -124,7 +124,7 @@ export default function ProfessorSearchPage() {
   const loadReviews = async (professorId: string) => {
     const { data, error } = await supabase
       .from('reviews')
-      .select('*, course:courses(*), profile:profiles(*)')
+      .select('*, course:courses(*)')
       .eq('professor_id', professorId)
       .order('created_at', { ascending: false });
 

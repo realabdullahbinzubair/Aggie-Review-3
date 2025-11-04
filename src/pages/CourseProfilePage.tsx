@@ -32,7 +32,7 @@ export default function CourseProfilePage() {
 
       const { data: reviewsData, error: reviewsError } = await supabase
         .from('reviews')
-        .select('*, professor:professors(*), course:courses(*), profile:profiles(*)')
+        .select('*, professor:professors(*), course:courses(*)')
         .eq('course_id', courseData.id)
         .order('created_at', { ascending: false });
 
