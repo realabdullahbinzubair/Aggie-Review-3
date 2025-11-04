@@ -4,7 +4,7 @@ import { Star, ThumbsUp, TrendingUp, MessageSquarePlus, Calendar, ArrowLeft } fr
 import NavBar from '../components/NavBar';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Professor, Review, Course } from '../types';
+import { Professor, Review, Department } from '../types';
 import ReviewFormModal from '../components/ReviewFormModal';
 
 export default function ProfessorSearchPage() {
@@ -48,10 +48,19 @@ export default function ProfessorSearchPage() {
             .select('department:departments(*)')
             .eq('professor_id', prof.id);
 
+          const departments: Department[] = [];
+          if (depts) {
+            for (const item of depts) {
+              if (item.department) {
+                departments.push(item.department as unknown as Department);
+              }
+            }
+          }
+
           return {
             ...prof,
-            departments: depts?.map(d => d.department).filter(Boolean) || [],
-            department: depts?.[0]?.department || undefined
+            departments,
+            department: departments[0]
           };
         })
       );
@@ -142,10 +151,19 @@ export default function ProfessorSearchPage() {
           .select('department:departments(*)')
           .eq('professor_id', updatedProf.id);
 
+        const departments: Department[] = [];
+        if (depts) {
+          for (const item of depts) {
+            if (item.department) {
+              departments.push(item.department as unknown as Department);
+            }
+          }
+        }
+
         setSelectedProfessor({
           ...updatedProf,
-          departments: depts?.map(d => d.department).filter(Boolean) || [],
-          department: depts?.[0]?.department || undefined
+          departments,
+          department: departments[0]
         });
       }
 

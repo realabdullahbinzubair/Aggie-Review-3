@@ -34,9 +34,22 @@ export default function ReviewFormModal({ professor, onClose, onSubmit }: Review
   }, []);
 
   const loadCourses = async () => {
+    const { data: professorDepts } = await supabase
+      .from('professor_departments')
+      .select('department_id')
+      .eq('professor_id', professor.id);
+
+    if (!professorDepts || professorDepts.length === 0) {
+      setCourses([]);
+      return;
+    }
+
+    const departmentIds = professorDepts.map(pd => pd.department_id);
+
     const { data, error } = await supabase
       .from('courses')
       .select('*')
+      .in('department_id', departmentIds)
       .order('code');
 
     if (!error && data) {

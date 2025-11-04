@@ -13,7 +13,7 @@ export default function CourseSearchPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Course[]>([]);
-  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [selectedCourse] = useState<Course | null>(null);
   const [professorData, setProfessorData] = useState<ProfessorWithReviews[]>([]);
   const [loading, setLoading] = useState(true);
 

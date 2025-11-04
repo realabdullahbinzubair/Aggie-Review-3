@@ -1,4 +1,4 @@
-import { GraduationCap, Menu, X, User, Lock, LogOut, FileText } from 'lucide-react';
+import { GraduationCap, Menu, User, Lock, LogOut, FileText } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
