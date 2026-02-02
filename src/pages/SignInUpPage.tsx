@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GraduationCap, Mail, Lock, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
 
 export default function SignInUpPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -10,6 +11,9 @@ export default function SignInUpPage() {
   const [fullName, setFullName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showVerificationMessage, setShowVerificationMessage] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
+  const [isVerifying, setIsVerifying] = useState(false);
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
 
@@ -44,20 +48,50 @@ export default function SignInUpPage() {
         if (error) {
           setError(error.message);
         } else {
-          navigate('/');
+          // Show verification message instead of navigating
+          setShowVerificationMessage(true);
         }
       } else {
         const { error } = await signIn(email, password);
         if (error) {
-          setError('Invalid email or password');
+          if (error.message.includes('Email not confirmed')) {
+            setError('Please verify your email before signing in. Check your inbox for the verification link.');
+          } else {
+            setError('Invalid email or password');
+          }
         } else {
           navigate('/');
         }
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleVerifyCode = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsVerifying(true);
+
+    try {
+      const { data, error } = await supabase.auth.verifyOtp({
+        email,
+        token: verificationCode,
+        type: 'email',
+      });
+
+      if (error) {
+        setError(error.message || 'Invalid verification code');
+      } else if (data.session) {
+        // Successfully verified and signed in
+        navigate('/');
+      }
+    } catch {
+      setError('Failed to verify code');
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -72,7 +106,79 @@ export default function SignInUpPage() {
           <p className="text-gray-600">North Carolina A&T State University</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg p-8">
+        {showVerificationMessage ? (
+          <div className="bg-white rounded-xl shadow-lg p-8">
+            <div className="text-center mb-6">
+              <div className="mb-4 flex justify-center">
+                <Mail size={64} className="text-ncat-gold" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Verify Your Email</h2>
+              <p className="text-gray-600 mb-2">
+                We've sent a verification code to:
+              </p>
+              <p className="text-ncat-blue font-semibold mb-6">{email}</p>
+            </div>
+
+            <form onSubmit={handleVerifyCode} className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Verification Code
+                </label>
+                <input
+                  type="text"
+                  value={verificationCode}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ncat-gold focus:border-transparent text-center text-2xl tracking-widest"
+                  placeholder="000000"
+                  maxLength={6}
+                  required
+                />
+                <p className="text-xs text-gray-500 mt-2 text-center">
+                  Enter the 6-digit code from your email
+                </p>
+              </div>
+
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isVerifying || verificationCode.length !== 6}
+                className="w-full bg-ncat-gold hover:bg-ncat-blue text-white font-semibold py-3 rounded-lg transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isVerifying ? 'Verifying...' : 'Verify Email'}
+              </button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowVerificationMessage(false);
+                  setIsSignUp(false);
+                  setEmail('');
+                  setPassword('');
+                  setFullName('');
+                  setVerificationCode('');
+                  setError('');
+                }}
+                className="text-sm text-gray-600 hover:text-ncat-blue transition-colors"
+              >
+                Back to Sign In
+              </button>
+            </div>
+
+            <div className="mt-4 text-center">
+              <p className="text-xs text-gray-500">
+                Didn't receive the code? Check your spam folder or try signing up again.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="flex rounded-lg bg-gray-100 p-1 mb-6">
             <button
               type="button"
@@ -189,6 +295,7 @@ export default function SignInUpPage() {
             </button>
           </div>
         </div>
+        )}
 
         <p className="text-center text-sm text-gray-600 mt-6">
           By signing up, you agree to rate professors fairly and honestly

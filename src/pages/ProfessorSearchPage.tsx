@@ -195,11 +195,11 @@ export default function ProfessorSearchPage() {
         <NavBar />
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <button
-            onClick={() => setSelectedProfessor(null)}
+            onClick={() => navigate('/')}
             className="flex items-center space-x-2 text-gray-600 hover:text-ncat-blue mb-6 transition-colors"
           >
             <ArrowLeft size={20} />
-            <span className="font-medium">Back to search results</span>
+            <span className="font-medium">Back to Dashboard</span>
           </button>
 
           <div className="bg-white rounded-lg shadow-lg p-8 mb-6">
@@ -310,7 +310,7 @@ export default function ProfessorSearchPage() {
                             ))}
                           </div>
                           <span className="text-sm font-semibold text-gray-700">
-                            {review.course?.code}
+                            {review.course?.code}{" - "}{review.course?.name}
                           </span>
                         </div>
                         <div className="flex items-center text-sm text-gray-500 space-x-4">
